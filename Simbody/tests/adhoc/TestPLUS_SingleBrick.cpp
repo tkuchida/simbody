@@ -216,7 +216,7 @@ private:
     // Assemble all combinations of 1 or more indices in [0, sizeOfSet]. Creates
     // an array of 2^sizeOfSet-1 index arrays (indices into proximal positions).
     void createProximalIndexArrays(int sizeOfSet,
-        Array_<Array_<ProximalPointIndex>>& arrayOfIndexArrays) const;
+        Array_<Array_<ProximalPointIndex> >& arrayOfIndexArrays) const;
 
     // Try projecting positions using the provided combination of constraint
     // indices. Return the 2-norm distance between the original and final Q (or
@@ -840,7 +840,7 @@ PositionProjecter::PositionProjecter(MultibodySystem& mbs,
 void PositionProjecter::projectPositionsExhaustive(State& s) const
 {
     // Assemble all combinations of 1 or more proximal points.
-    Array_<Array_<ProximalPointIndex>> arrayOfIndexArrays;
+    Array_<Array_<ProximalPointIndex> > arrayOfIndexArrays;
     createProximalIndexArrays((int)m_proximalPointIndices.size(),
                               arrayOfIndexArrays);
     if (PRINT_DEBUG_INFO_POSITIONS)
@@ -943,7 +943,7 @@ void PositionProjecter::projectPositionsPruning(State& s) const
 
 //------------------------------ Private methods -------------------------------
 void PositionProjecter::createProximalIndexArrays(int sizeOfSet,
-    Array_<Array_<ProximalPointIndex>>& arrayOfIndexArrays) const
+    Array_<Array_<ProximalPointIndex> >& arrayOfIndexArrays) const
 {
     SimTK_ASSERT_ALWAYS(arrayOfIndexArrays.empty(), "Input array must be empty.");
     const int numArrays = (1 << sizeOfSet) - 1;
